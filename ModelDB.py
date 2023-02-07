@@ -20,7 +20,7 @@ class Base(DeclarativeBase):
     pass
 
 
-class MUser(Base):  # TODO Инициальзация модели бд
+class MUser(Base):  # Инициальзация модели бд
     __tablename__ = "users"
     _id: Mapped[int] = mapped_column("id", MEDIUMINT, primary_key=True, autoincrement=True)
     _discord_id: Mapped[int] = mapped_column("discord_id", BIGINT, unique=True, nullable=False)
@@ -39,20 +39,20 @@ class MUser(Base):  # TODO Инициальзация модели бд
         return f"{self.__dict__}"
 
 
-class MInvetory(Base):  # TODO Инициальзация модели бд
+class MInvetory(Base):  # Инициальзация модели бд
     __tablename__ = "inventories"
     _id: Mapped[int] = mapped_column("id", BIGINT, primary_key=True)
     _user_id: Mapped[int] = mapped_column("user_id", ForeignKey("users.id"))
-    _user: Mapped["User"] = relationship()
+    _user: Mapped["MUser"] = relationship()
     _item_id: Mapped[int] = mapped_column("item_id", ForeignKey("items.id"))
-    _item: Mapped["Item"] = relationship()
+    _item: Mapped["MItem"] = relationship()
     _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False)
 
     def __repr__(self) -> str:
         return f"{self.__dict__}"
 
 
-class MItem(Base):  # TODO Инициальзация модели бд
+class MItem(Base):  # Инициальзация модели бд
     __tablename__ = "items"
     _id: Mapped[int] = mapped_column("id", BIGINT, primary_key=True)
     _item_type: Mapped[str] = mapped_column("item_type", TEXT, unique=False, nullable=False)
@@ -64,11 +64,11 @@ class MItem(Base):  # TODO Инициальзация модели бд
         return f"{self.__dict__}"
 
 
-class MPlayer(Base):  # TODO Инициальзация модели бд
+class MPlayer(Base):  # Инициальзация модели бд
     __tablename__ = "players"
     _id: Mapped[int] = mapped_column("id", BIGINT, primary_key=True)
     _user_id: Mapped[int] = mapped_column("user_id", ForeignKey("users.id"))
-    _user: Mapped["User"] = relationship()
+    _user: Mapped["MUser"] = relationship()
     _heal_points: Mapped[int] = mapped_column("heal_points", TINYINT, unique=False, nullable=False, default=100)
     _armor_points: Mapped[int] = mapped_column("armor_points", TINYINT, unique=False, nullable=False, default=100)
     _effects: Mapped[dict] = mapped_column("effects", JSON, unique=False, nullable=False)

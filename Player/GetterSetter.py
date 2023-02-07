@@ -1,8 +1,20 @@
-from ModelDB import MUser
+from ModelDB import *
 from ModelDB import session
+from sqlalchemy.exc import NoResultFound
 
 
-class GetterSetter(MUser):
+class _GetSet(MUser):
+    # def __init__(self):
+    #     if self.__check():
+    #         for i in self.__check():
+    #             self.i = i
+
+    def __check(self):
+        try:
+            return session.query(MUser).where(MUser._discord_id == self.member.id).one()
+        except NoResultFound:
+            return False
+
     @property
     def id(self):
         return self._id
