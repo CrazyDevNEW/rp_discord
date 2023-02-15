@@ -15,4 +15,4 @@ python3 main.py
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/CrazyDevNEW/rp_discord/blob/main/LICENSE.md)
