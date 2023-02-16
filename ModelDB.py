@@ -1,4 +1,6 @@
 import datetime
+import time
+
 from sqlalchemy import ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase
@@ -17,7 +19,8 @@ import config
 
 
 class Base(DeclarativeBase):
-    pass
+    def __repr__(self) -> str:
+        return f"{self.__dict__}"
 
 
 class MUser(Base):  # Инициальзация модели бд
@@ -28,15 +31,12 @@ class MUser(Base):  # Инициальзация модели бд
     _last_name: Mapped[str] = mapped_column("last_name", TEXT(50), unique=False, nullable=False)
     _nationality: Mapped[str] = mapped_column("nationality", TEXT(50), unique=False, nullable=False, default="Russia")
     _description: Mapped[str] = mapped_column("description", TEXT(1000), unique=False, nullable=False)
-    _skin: Mapped[dict] = mapped_column("skin", JSON, unique=False, nullable=False)
-    _experience: Mapped[str] = mapped_column("experience", BIGINT, unique=False, nullable=False)
-    _game_currency: Mapped[int] = mapped_column("game_currency", BIGINT, unique=False, nullable=False)
-    _real_currency: Mapped[int] = mapped_column("real_currency", BIGINT, unique=False, nullable=False)
-    _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False)
-    _latest_in_game: Mapped[datetime] = mapped_column("latest_in_game", DATETIME, unique=False, nullable=False)
-
-    def __repr__(self) -> str:
-        return f"{self.__dict__}"
+    _skin: Mapped[dict] = mapped_column("skin", JSON, unique=False, nullable=False, default={})
+    _experience: Mapped[str] = mapped_column("experience", BIGINT, unique=False, nullable=False, default=0)
+    _game_currency: Mapped[int] = mapped_column("game_currency", BIGINT, unique=False, nullable=False, default=0)
+    _real_currency: Mapped[int] = mapped_column("real_currency", BIGINT, unique=False, nullable=False, default=0)
+    _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False, default=datetime.datetime.now())
+    _latest_in_game: Mapped[datetime] = mapped_column("latest_in_game", DATETIME, unique=False, nullable=False, default=datetime.datetime.now())
 
 
 class MInvetory(Base):  # Инициальзация модели бд
@@ -48,9 +48,6 @@ class MInvetory(Base):  # Инициальзация модели бд
     _item: Mapped["MItem"] = relationship()
     _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False)
 
-    def __repr__(self) -> str:
-        return f"{self.__dict__}"
-
 
 class MItem(Base):  # Инициальзация модели бд
     __tablename__ = "items"
@@ -59,9 +56,6 @@ class MItem(Base):  # Инициальзация модели бд
     _name: Mapped[str] = mapped_column("name", TEXT, unique=False, nullable=False)
     _description: Mapped[str] = mapped_column("description", TEXT, unique=False, nullable=False)
     _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False)
-
-    def __repr__(self) -> str:
-        return f"{self.__dict__}"
 
 
 class MPlayer(Base):  # Инициальзация модели бд
@@ -74,9 +68,6 @@ class MPlayer(Base):  # Инициальзация модели бд
     _effects: Mapped[dict] = mapped_column("effects", JSON, unique=False, nullable=False)
     _position: Mapped[dict] = mapped_column("position", JSON, unique=False, nullable=False)
     _join_at: Mapped[datetime] = mapped_column("join_at", DATETIME, unique=False, nullable=False)
-
-    def __repr__(self) -> str:
-        return f"{self.__dict__}"
 
 
 engine = create_engine(config.dbUrl)

@@ -1,5 +1,5 @@
 from ModelDB import MUser
-from Player.GetterSetter import _GetSet
+from Player.GetSet import _GetSet, session
 import discord
 
 
@@ -8,14 +8,19 @@ class User(_GetSet):
         self.member = member
         super().__init__()
 
-    def __str__(self) -> str:
-        pass
+    def create(self, **kwargs):
+        user = MUser(
+            _discord_id=self.member.id,
+            _first_name=kwargs.get("first_name"),
+            _last_name=kwargs.get("last_name"),
+            _nationality=kwargs.get("nationality"),
+            _description=kwargs.get("description")
+        )
+        session.add(user)
+        session.commit()
+        super().__init__()
 
-    def create_user(self):
-        pass
-
-    def delete_user(self):
-        pass
-
-    def update_user(self):
-        pass
+    def delete(self):
+        session.delete(self.MUser)
+        session.commit()
+        del self.MUser

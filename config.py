@@ -2,10 +2,10 @@
 discord_token = "YOUR_DISCORD_TOKEN"
 
 # DateBase
-dbHost = "127.0.0.1"
+dbHost = "HOST"
 dbPort = "3306"
 dbUser = "USERNAME_DB"
 dbPassword = "PASSWD_USER_DB"
 dbDateBase = "NAME_DB"
 dbConnector = "mariadb+mariadbconnector"
-dbBaseUrl = f"{dbConnector}://{dbUser}:{dbPassword}@{dbHost}:{dbPort}/{dbDateBase}"
+dbUrl = f"{dbConnector}://{dbUser}:{dbPassword}@{dbHost}:{dbPort}/{dbDateBase}"

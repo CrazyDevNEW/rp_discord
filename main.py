@@ -12,9 +12,22 @@ async def on_ready():
 
 
 @client.command()
+async def create(ctx):
+    user = User(ctx.author)
+    user.create(first_name="Oleg", last_name="Rahmatullin", nationality="RUS", description="Hello World!")
+
+
+@client.command()
+async def delete(ctx):
+    user = User(ctx.author)
+    user.delete()
+
+
+@client.command()
 async def test(ctx):
     user = User(ctx.author)
-    print(user.id)
+    user.real_currency = 10
+
 
 if __name__ == '__main__':
     client.run(config.discord_token)
