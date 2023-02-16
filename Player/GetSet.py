@@ -1,11 +1,9 @@
-from ModelDB import *
-from ModelDB import session
+from ModelDB import MUser, session
 from sqlalchemy.exc import NoResultFound
 
 
-class _GetSet(MUser):
+class _GetSet:
     def __init__(self):
-        super().__init__()
         self.MUser = self.__check()
 
     def __check(self):
@@ -15,7 +13,6 @@ class _GetSet(MUser):
             return None
 
 # GETTERS
-
     @property
     def id(self):
         return self.MUser._id

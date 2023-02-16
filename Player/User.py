@@ -1,5 +1,7 @@
-from ModelDB import MUser
+import Item.Item
+from ModelDB import MUser, MInvetory
 from Player.GetSet import _GetSet, session
+from Item.Item import Item
 import discord
 
 
@@ -24,3 +26,12 @@ class User(_GetSet):
         session.delete(self.MUser)
         session.commit()
         super().__init__()
+
+    def add_item(self, item: Item):
+        added_item = MInvetory(
+            _user_id=self.id,
+            _item_id=item.id
+        )
+        session.add(added_item)
+        session.commit()
+

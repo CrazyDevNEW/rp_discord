@@ -46,7 +46,7 @@ class MInvetory(Base):  # Инициальзация модели бд
     _user: Mapped["MUser"] = relationship()
     _item_id: Mapped[int] = mapped_column("item_id", ForeignKey("items.id"))
     _item: Mapped["MItem"] = relationship()
-    _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False)
+    _create_at: Mapped[datetime] = mapped_column("create_at", DATETIME, unique=False, nullable=False, default=datetime.datetime.now())
 
 
 class MItem(Base):  # Инициальзация модели бд
@@ -69,6 +69,11 @@ class MPlayer(Base):  # Инициальзация модели бд
     _position: Mapped[dict] = mapped_column("position", JSON, unique=False, nullable=False)
     _join_at: Mapped[datetime] = mapped_column("join_at", DATETIME, unique=False, nullable=False)
 
+
+# class MWorld(Base):
+#     __tablename__ = "worlds"
+#     _id: Mapped[int] = mapped_column("id", BIGINT, primary_key=True)
+#     _name: Mapped[str] = mapped_column("name", TEXT, unique=True, nullable=False)
 
 engine = create_engine(config.dbUrl)
 session = Session(engine)

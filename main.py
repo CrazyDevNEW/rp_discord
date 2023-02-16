@@ -1,9 +1,13 @@
 import discord
 from discord.ext import commands
 from Player.User import User
+from Item.Item import Item
 import config
 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+
+item1 = Item(1)
+item2 = Item(2)
 
 
 @client.event
@@ -14,7 +18,7 @@ async def on_ready():
 @client.command()
 async def create(ctx):
     user = User(ctx.author)
-    user.create(first_name="Oleg", last_name="Rahmatullin", nationality="RUS", description="Hello World!")
+    user.create(first_name="Miha", last_name="Pidor", nationality="RUS", description="Hello World!")
 
 
 @client.command()
@@ -26,7 +30,7 @@ async def delete(ctx):
 @client.command()
 async def test(ctx):
     user = User(ctx.author)
-    user.real_currency = 10
+    user.add_item(item1)
 
 
 if __name__ == '__main__':
