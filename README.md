@@ -1,36 +1,17 @@
-# RolePlay Discord
+# RolePlayDiscord (RPD)
 
-Foobar is a Python library for dealing with word pluralization.
+RPD is a small Python project for implementing a role-playing game through the Discord.py.
 
-## Installation
+## Сonfiguration
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
+For the bot to work, you will need MySQL or MariaDB Database.
+In the config.py, specify the data you need to connect to Discord and to the database
 
 ## Usage
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+python3 main.py
 ```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## License
 
