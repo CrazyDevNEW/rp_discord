@@ -12,7 +12,3 @@ In the config.py, specify the data you need to connect to Discord and to the dat
 ```bash
 python3 main.py
 ```
-
-## License
-
-[MIT](https://github.com/CrazyDevNEW/rp_discord/blob/main/LICENSE.md)
