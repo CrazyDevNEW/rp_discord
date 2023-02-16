@@ -23,4 +23,4 @@ class User(_GetSet):
     def delete(self):
         session.delete(self.MUser)
         session.commit()
-        del self.MUser
+        super().__init__()
