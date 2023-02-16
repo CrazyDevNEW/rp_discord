@@ -1,13 +1,16 @@
 import discord
 from discord.ext import commands
 from Player.User import User
-from Item.Item import Item
+from Items.Item import Item
 import config
 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
-item1 = Item(1)
-item2 = Item(2)
+id_items = {
+    "FirstItem": 1,
+    "SecondItem": 2,
+    "Third": 3
+}
 
 
 @client.event
@@ -30,8 +33,9 @@ async def delete(ctx):
 @client.command()
 async def test(ctx):
     user = User(ctx.author)
-    user.add_item(item1)
-
+    items = user.get_items(id_items.get("Third"))
+    for i in items:
+        print(i)
 
 if __name__ == '__main__':
     client.run(config.discord_token)

@@ -1,13 +1,13 @@
-from ModelDB import MItem, session
+from ModelDB import MItem, MInvetory, session
 from sqlalchemy.exc import NoResultFound
 
 
 class Item:
     def __init__(self, id: int):
-        self.MItem = self.__check_item(id)
+        self.MItem = self.__check_MItem(id)
     
     @staticmethod
-    def __check_item(id: int):
+    def __check_MItem(id: int):
         try:
             return session.query(MItem).where(MItem._id == id).one()
         except NoResultFound:
