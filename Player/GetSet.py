@@ -4,9 +4,9 @@ from sqlalchemy.exc import NoResultFound
 
 class _GetSet:
     def __init__(self):
-        self.MUser = self.__check()
+        self.MUser = self.__check_MUser()
 
-    def __check(self):
+    def __check_MUser(self):
         try:
             return session.query(MUser).where(MUser._discord_id == self.member.id).one()
         except NoResultFound:

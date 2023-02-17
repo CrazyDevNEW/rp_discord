@@ -1,6 +1,6 @@
 from sqlalchemy.exc import NoResultFound
 import Items.Item
-from ModelDB import MUser, MInvetory
+from ModelDB import MUser, MInvItem
 from Player.GetSet import _GetSet, session
 from Items.Item import Item
 import discord
@@ -28,21 +28,19 @@ class User(_GetSet):
         session.commit()
         super().__init__()
 
-    def add_item(self, item: Item):
-        added_item = MInvetory(
+    def add_item(self, item_id):
+        added_item = MInvItem(
             _user_id=self.id,
-            _item_id=item.id
+            _item_id=item_id
         )
         session.add(added_item)
         session.commit()
 
     def get_items(self, id: int = None):
         if id is not None:
-            result = session.query(MInvetory).where(MInvetory._user_id == self.id).where(MInvetory._item_id == id).all()
-            return result if len(result) != 0 else None
+            pass
         else:
-            result = session.query(MInvetory).where(MInvetory._user_id == self.id).all()
-            return result if len(result) != 0 else None
+            pass
 
-    def remove_item(self):
+    def remove_item(self, item):
         pass
